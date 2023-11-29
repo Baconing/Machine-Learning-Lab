@@ -158,11 +158,11 @@ public:
 		if(EngineLibrary != nullptr) {
 			EngineLibrary->unload();
 			delete EngineLibrary;
-			EngineLibrary = new boost::dll::shared_library("Core/DynamicCodeExecutionEngine.dll");
+			EngineLibrary = new boost::dll::shared_library("libDCEE.so");
 			GetEngineInstance = EngineLibrary->get<DynamicCodeExecutionEngineInterface * ()>("GetInstance");
 		}
 		else {
-			EngineLibrary = new boost::dll::shared_library("Core/DynamicCodeExecutionEngine.dll");
+			EngineLibrary = new boost::dll::shared_library("libDCEE.so");
 			GetEngineInstance = EngineLibrary->get<DynamicCodeExecutionEngineInterface * ()>("GetInstance");
 		}
 	}

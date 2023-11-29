@@ -1,0 +1,7 @@
+add_subdirectory(Attributes)
+add_subdirectory(EdgeInterface)
+add_subdirectory(GraphEngineInterface)
+add_subdirectory(GraphInterface)
+add_subdirectory(NodeIOs)
+add_subdirectory(Nodes)
+add_subdirectory(Sorters)

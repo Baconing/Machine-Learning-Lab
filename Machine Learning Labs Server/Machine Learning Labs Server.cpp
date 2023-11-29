@@ -7,7 +7,7 @@
 #include <filesystem>
 
 int main() {
-    Sleep(10000);
+    sleep(10000);
     DynamicCodeExecutionEngineInterface::ReLoadEngine();
     DynamicCodeExecutionEngineInterface* instance = DynamicCodeExecutionEngineInterface::GetInstance();
 

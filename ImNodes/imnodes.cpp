@@ -10,7 +10,6 @@
 #include "imnodes_internal.h"
 
 #define IMGUI_DEFINE_MATH_OPERATORS
-#include <imgui_internal.h>
 
 // Check minimum ImGui version
 #define MINIMUM_COMPATIBLE_IMGUI_VERSION 17400
@@ -3016,14 +3015,14 @@ void NodeLineHandler(ImNodesEditorContext& editor, const char* const line)
 {
     int ID;
     int x, y;
-    if (sscanf_s(line, "[node.%i", &ID) == 1)
+    if (sscanf(line, "[node.%i", &ID) == 1)
     {
         const int node_idx = ObjectPoolFindOrCreateIndex(editor.Nodes, ID);
         GImNodes->CurrentNodeIdx = node_idx;
         ImNodeData& node = editor.Nodes.Pool[node_idx];
         node.Id = ID;
     }
-    else if (sscanf_s(line, "origin=%i,%i", &x, &y) == 2)
+    else if (sscanf(line, "origin=%i,%i", &x, &y) == 2)
     {
         ImNodeData& node = editor.Nodes.Pool[GImNodes->CurrentNodeIdx];
         node.Origin = ImVec2((float)x, (float)y);
@@ -3032,7 +3031,7 @@ void NodeLineHandler(ImNodesEditorContext& editor, const char* const line)
 
 void EditorLineHandler(ImNodesEditorContext& editor, const char* const line)
 {
-    (void)sscanf_s(line, "panning=%f,%f", &editor.Panning.x, &editor.Panning.y);
+    (void)sscanf(line, "panning=%f,%f", &editor.Panning.x, &editor.Panning.y);
 }
 } // namespace
 

@@ -3,7 +3,7 @@
 #include <NodeInterface.h>
 #include <AttributeInterface.h>
 
-#include <lua.hpp>
+#include <lua5.4/lua.hpp>
 #include <iostream>
 #include <string>
 #include <vector>

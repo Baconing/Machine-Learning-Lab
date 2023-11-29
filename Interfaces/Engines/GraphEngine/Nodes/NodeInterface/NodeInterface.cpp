@@ -95,7 +95,7 @@ std::vector<std::vector<double>> NodeInterface::GetMatrixFromData(nlohmann::json
 		std::vector<double> Row;
 		for (int j = 0; j < Data["Columns"]; j++)
 		{
-			Row.push_back(Data["Data"][i * Data["Columns"] + j]);
+			Row.push_back(Data["Data"][i * Data["Columns"].get<int>() + j]);
 		}
 		Matrix.push_back(Row);
 	}
@@ -112,7 +112,7 @@ std::vector<std::vector<std::vector<double>>> NodeInterface::GetTensorFromData(n
 			std::vector<double> Row;
 			for (int k = 0; k < Data["Depth"]; k++)
 			{
-				Row.push_back(Data["Data"][i * Data["Columns"] * Data["Depth"] + j * Data["Depth"] + k]);
+				Row.push_back(Data["Data"][i * Data["Columns"].get<int>() * Data["Depth"].get<int>() + j * Data["Depth"].get<int>() + k]);
 			}
 			Matrix.push_back(Row);
 		}

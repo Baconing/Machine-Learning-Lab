@@ -35,11 +35,11 @@ public:
 			j["Excluded Core DLLs"] = nlohmann::json::array();
 			j["Engines"] = nlohmann::json::array();
 
-			j["Core Libs Load Order"].push_back("brotlicommon.dll");
-			j["Core Libs Load Order"].push_back("brotlidec.dll");
-			j["Core Libs Load Order"].push_back("bz2d.dll");
-			j["Core Libs Load Order"].push_back("zlibd1.dll");
-			j["Core Libs Load Order"].push_back("libpng16d.dll");
+//			j["Core Libs Load Order"].push_back("brotlicommon.dll");
+//			j["Core Libs Load Order"].push_back("brotlidec.dll");
+//			j["Core Libs Load Order"].push_back("bz2d.dll");
+//			j["Core Libs Load Order"].push_back("zlibd1.dll");
+//			j["Core Libs Load Order"].push_back("libpng16d.dll");
 
 			j["Excluded Core DLLs"].push_back("DynamicCodeExecutionEngine.dll");
 
@@ -71,7 +71,7 @@ public:
 		//find all dlls in the languages folder
 		for (auto& p : std::filesystem::directory_iterator("Plugins/Libs/")) {
 			//check if dll
-			if (p.path().extension().string() != ".dll") {
+			if (p.path().extension().string() != ".dll" || p.path().extension().string() != ".so") {
 				continue;
 			}
 
@@ -122,11 +122,11 @@ public:
 			j["ExcludedDLLs"] = nlohmann::json::array();
 			j["Engines"] = nlohmann::json::array();
 
-			j["Core Libs Load Order"].push_back("brotlicommon.dll");
-			j["Core Libs Load Order"].push_back("brotlidec.dll");
-			j["Core Libs Load Order"].push_back("bz2d.dll");
-			j["Core Libs Load Order"].push_back("zlibd1.dll");
-			j["Core Libs Load Order"].push_back("libpng16d.dll");
+//			j["Core Libs Load Order"].push_back("brotlicommon.dll");
+//			j["Core Libs Load Order"].push_back("brotlidec.dll");
+//			j["Core Libs Load Order"].push_back("bz2d.dll");
+//			j["Core Libs Load Order"].push_back("zlibd1.dll");
+//			j["Core Libs Load Order"].push_back("libpng16d.dll");
 
 			j["ExcludedDLLs"].push_back("DynamicCodeExecutionEngine.dll");
 
@@ -164,7 +164,7 @@ public:
 				continue;
 			}
 			//check if dll
-			if (p.path().extension().string() != ".dll") {
+			if (p.path().extension().string() != ".dll" || p.path().extension().string() != ".so") {
 				continue;
 			}
 
@@ -217,11 +217,11 @@ public:
 			j["Excluded DLLs"] = nlohmann::json::array();
 			j["Engines"] = nlohmann::json::array();
 
-			j["Core Libs Load Order"].push_back("brotlicommon.dll");
-			j["Core Libs Load Order"].push_back("brotlidec.dll");
-			j["Core Libs Load Order"].push_back("bz2d.dll");
-			j["Core Libs Load Order"].push_back("zlibd1.dll");
-			j["Core Libs Load Order"].push_back("libpng16d.dll");
+//			j["Core Libs Load Order"].push_back("brotlicommon.dll");
+//			j["Core Libs Load Order"].push_back("brotlidec.dll");
+//			j["Core Libs Load Order"].push_back("bz2d.dll");
+//			j["Core Libs Load Order"].push_back("zlibd1.dll");
+//			j["Core Libs Load Order"].push_back("libpng16d.dll");
 
 			j["Excluded DLLs"].push_back("DynamicCodeExecutionEngine.dll");
 
@@ -243,8 +243,9 @@ public:
 			if (p.is_directory()) {
 				continue;
 			}
-			//check if dll
-			if (p.path().extension().string() != ".dll") {
+
+			//check if dll or so
+			if (p.path().extension().string() != ".so") {
 				continue;
 			}
 
@@ -266,7 +267,7 @@ public:
 
 			// Check if the library loaded successfully
 			if (!myLibrary->IsLoaded()) {
-				std::cerr << "Failed to load the DLL." << std::endl;
+				std::cerr << "Failed to load the library." << std::endl;
 				return;
 			}
 
@@ -294,8 +295,8 @@ public:
 		i >> j;
 		//find all dlls in the languages folder
 		for (auto& p : std::filesystem::directory_iterator("Plugins/Languages/")) {
-			//check if dll
-			if (p.path().extension().string() != ".dll") {
+			//check if dll or so
+			if (p.path().extension().string() != ".dll" || p.path().extension().string() != ".so") {
 				continue;
 			}
 
@@ -414,35 +415,35 @@ static DynamicCodeExecutionEngine instance;
 
 extern "C" {
     // Define a function that returns the result of adding two numbers
-    __declspec(dllexport) DynamicCodeExecutionEngineInterface * GetInstance() {
+    DynamicCodeExecutionEngineInterface * GetInstance() {
         return &instance;
     }
 
-	__declspec(dllexport) bool IsSinglton() {
+	bool IsSinglton() {
 		return true;
 	}
 
-	__declspec(dllexport) bool IsEngine() {
+	bool IsEngine() {
 		return true;
 	}
 
-	__declspec(dllexport) bool IsLibrary() {
+	bool IsLibrary() {
 		return false;
 	}
 
-	__declspec(dllexport) bool IsPlugin() {
+	bool IsPlugin() {
 		return false;
 	}
 
-	__declspec(dllexport) bool IsLanguage() {
+	bool IsLanguage() {
 		return false;
 	}
 
-	__declspec(dllexport) bool IsScript() {
+	bool IsScript() {
 		return false;
 	}
 
-	__declspec(dllexport) bool IsSerializable() {
+	bool IsSerializable() {
 		return true;
 	}
 }

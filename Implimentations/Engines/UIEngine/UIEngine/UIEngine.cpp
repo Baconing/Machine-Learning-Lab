@@ -15,10 +15,10 @@
 #include <glm/glm.hpp>
 
 //dear imgui
-#include <imgui_internal.h>
-#include <imgui.h>
-#include <imgui_impl_glfw.h>
-#include <imgui_impl_opengl3.h>
+#include <imgui/imgui_internal.h>
+#include <imgui/imgui.h>
+#include <imgui/imgui_impl_glfw.h>
+#include <imgui/imgui_impl_opengl3.h>
 
 //imnodes
 #include <imnodes.h>
@@ -295,7 +295,8 @@ public:
 		ImGui_ImplGlfw_InitForOpenGL(window, true);
 		ImGui_ImplOpenGL3_Init("#version 330");
 		//enable docking
-		ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+        //  todo: fix, this flag doesnt exist
+		// ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
 
 		//init imnodes
@@ -322,9 +323,10 @@ public:
 			ImGui::NewFrame();
 
 			//dockspace over viewport
-			//push dockspace background color
-			ImGui::PushStyleColor(ImGuiCol_DockingEmptyBg, ImVec4(Theme["Backround Color"][0], Theme["Backround Color"][1], Theme["Backround Color"][2], Theme["Backround Color"][3]));
-			ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
+            //push dockspace background color
+            //todo fix this because these dont exist
+//			ImGui::PushStyleColor(ImGuiCol_DockingEmptyBg, ImVec4(Theme["Backround Color"][0], Theme["Backround Color"][1], Theme["Backround Color"][2], Theme["Backround Color"][3]));
+//			ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
 			ImGui::PopStyleColor();
 
 			//menu bar
@@ -571,7 +573,7 @@ public:
 			//Node editor window
 			if (ImGui::Begin("Node Editor")) {
 				ImNodes::BeginNodeEditor();
-				std::map<std::string, GraphInterface*> graphs = GraphEngine->GetGraphs();
+                std::map<std::string, GraphInterface *> graphs = GraphEngine->GetGraphs();
 				std::map<unsigned int, NodeInterface*> nodes = graphs["main"]->GetNodes();
 				std::map<unsigned int, EdgeInterface*> edges = graphs["main"]->GetEdges();
 
@@ -770,11 +772,11 @@ static UIEngine instance;
 
 extern "C" {
 	
-	__declspec(dllexport) void CleanUp() {
+	void CleanUp() {
 		instance.~UIEngine();
 	}
 
-	__declspec(dllexport) UIEngineInterface* GetInstance() {
+	UIEngineInterface* GetInstance() {
 		return &instance;
 	}
 }

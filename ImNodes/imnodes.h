@@ -2,7 +2,7 @@
 
 #include <stddef.h>
 #define IMGUI_DEFINE_MATH_OPERATORS
-#include <imgui.h>
+#include <imgui/imgui.h>
 
 #ifdef IMNODES_USER_CONFIG
 #include IMNODES_USER_CONFIG
