@@ -377,3 +377,8 @@ Latex/node.json
 *.db
 *.idx3-ubyte
 *.idx1-ubyte
+
+build/
+cmake-build-debug/
+
+.idea/
